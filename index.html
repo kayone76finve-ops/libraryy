@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiano Library - Sistem Perpustakaan Digital</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="public/style.css" />
+    <link rel="icon" href="public/kii.jpeg" type="image/jpg" />
+    <style>
+      .sakura-petal {
+        position: absolute;
+        font-size: 1.5rem;
+        color: #ffb6d9;
+        opacity: 0;
+        pointer-events: none;
+        animation: sakuraDrift 12s linear infinite;
+      }
+
+      @keyframes sakuraDrift {
+        0% {
+          opacity: 0;
+          transform: translate(0, -50px) rotate(0deg);
+        }
+        10% {
+          opacity: 0.8;
+        }
+        90% {
+          opacity: 0.8;
+        }
+        100% {
+          opacity: 0;
+          transform: translate(100px, 100vh) rotate(720deg);
+        }
+      }
+
+      .sakura-petal:nth-child(1) {
+        left: 5%;
+        animation-delay: 0s;
+      }
+      .sakura-petal:nth-child(2) {
+        left: 15%;
+        animation-delay: 2s;
+        font-size: 1.2rem;
+      }
+      .sakura-petal:nth-child(3) {
+        left: 25%;
+        animation-delay: 4s;
+      }
+      .sakura-petal:nth-child(4) {
+        left: 35%;
+        animation-delay: 1s;
+        font-size: 1.8rem;
+      }
+      .sakura-petal:nth-child(5) {
+        left: 45%;
+        animation-delay: 3s;
+      }
+      .sakura-petal:nth-child(6) {
+        left: 55%;
+        animation-delay: 5s;
+        font-size: 1.3rem;
+      }
+      .sakura-petal:nth-child(7) {
+        left: 65%;
+        animation-delay: 2.5s;
+      }
+      .sakura-petal:nth-child(8) {
+        left: 75%;
+        animation-delay: 4.5s;
+        font-size: 1.6rem;
+      }
+      .sakura-petal:nth-child(9) {
+        left: 85%;
+        animation-delay: 1.5s;
+      }
+      .sakura-petal:nth-child(10) {
+        left: 95%;
+        animation-delay: 3.5s;
+        font-size: 1.4rem;
+      }
+    </style>
+  </head>
+  <body class="login-body">
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+    <div class="sakura-petal">🌸</div>
+
+    <div class="login-container">
+      <div class="login-card p-4">
+        <div class="text-center mb-4">
+          <img class="profile-avatar" src="public/kii.jpeg" alt="Profile" />
+          <h1 class="login-title mb-2">Kiano Library</h1>
+          <p class="text-muted">✨ Sistem Perpustakaan Digital Sakura ✨</p>
+        </div>
+        <div
+          id="alertMessage"
+          class="alert alert-dismissible fade"
+          role="alert"
+          style="display: none"
+        >
+          <span id="alertText"></span>
+          <button
+            type="button"
+            class="btn-close"
+            onclick="hideAlert()"
+          ></button>
+        </div>
+
+        <ul class="nav nav-pills nav-fill mb-4" id="loginTabs" role="tablist">
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link active"
+              id="login-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#login"
+              type="button"
+              role="tab"
+            >
+              Login
+            </button>
+          </li>
+          <li class="nav-item" role="presentation">
+            <button
+              class="nav-link"
+              id="register-tab"
+              data-bs-toggle="pill"
+              data-bs-target="#register"
+              type="button"
+              role="tab"
+            >
+              Register
+            </button>
+          </li>
+        </ul>
+
+        <div class="tab-content" id="loginTabContent">
+          <div class="tab-pane fade show active" id="login" role="tabpanel">
+            <form id="loginForm">
+              <div class="mb-3">
+                <label class="form-label"
+                  ><i class="bi bi-envelope"></i> Email</label
+                >
+                <input
+                  type="email"
+                  id="loginEmail"
+                  class="form-control"
+                  placeholder="nama@email.com"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"
+                  ><i class="bi bi-lock"></i> Password</label
+                >
+                <input
+                  type="password"
+                  id="loginPassword"
+                  class="form-control"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Login 🌸
+              </button>
+            </form>
+          </div>
+
+          <div class="tab-pane fade" id="register" role="tabpanel">
+            <form id="registerForm">
+              <div class="mb-3">
+                <label class="form-label"
+                  ><i class="bi bi-person"></i> Nama Lengkap</label
+                >
+                <input
+                  type="text"
+                  id="registerName"
+                  class="form-control"
+                  placeholder="Nama lengkap"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"
+                  ><i class="bi bi-envelope"></i> Email</label
+                >
+                <input
+                  type="email"
+                  id="registerEmail"
+                  class="form-control"
+                  placeholder="nama@email.com"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"
+                  ><i class="bi bi-lock"></i> Password</label
+                >
+                <input
+                  type="password"
+                  id="registerPassword"
+                  class="form-control"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label"
+                  ><i class="bi bi-lock"></i> Konfirmasi Password</label
+                >
+                <input
+                  type="password"
+                  id="confirmPassword"
+                  class="form-control"
+                  placeholder="••••••••"
+                  required
+                />
+              </div>
+              <button type="submit" class="btn btn-primary w-100">
+                Register 🌸
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <p class="text-center mt-4 text-muted small">
+          © 2025 Kiano Library System. Made with 🌸 by Kiano
+        </p>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/main.js"></script>
+  </body>
+</html>

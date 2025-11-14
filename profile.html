@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kiano Library - Sistem Perpustakaan Digital</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="public/style.css" />
+    <link rel="icon" href="public/kii.jpeg" type="image/jpg" />
+  </head>
+  <body>
+    <div class="dashboard-sakura">
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+    </div>
+
+    <div class="d-flex">
+      <div class="sidebar">
+        <div class="sidebar-header d-flex align-items-center">
+          <img class="profile-avatar" src="public/kii.jpeg" alt="Profile" />
+          <div>
+            <div class="text-white fw-bold fs-4">Kiano</div>
+            <div class="text-white-50 small">Library System</div>
+          </div>
+        </div>
+
+        <div class="p-3">
+          <a href="dashboard.html" class="nav-item">
+            <i class="bi bi-house"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="books.html" class="nav-item">
+            <i class="bi bi-book"></i>
+            <span>Daftar Buku</span>
+          </a>
+          <a href="profile.html" class="nav-item active">
+            <i class="bi bi-person"></i>
+            <span>Profil Saya</span>
+          </a>
+          <a href="index.html" class="nav-item" onclick="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+
+        <div
+          class="position-absolute bottom-0 w-100 p-3 border-top"
+          style="border-color: var(--soft-pink) !important"
+        >
+          <div class="d-flex align-items-center">
+            <img
+              id="sidebarAvatar"
+              src="public/kii.jpeg"
+              alt="Avatar"
+              class="rounded-circle me-3"
+              style="width: 45px; height: 45px; object-fit: cover"
+            />
+            <div>
+              <div id="sidebarName" class="fw-semibold small">Loading...</div>
+              <div id="sidebarEmail" class="text-muted" style="font-size: 12px">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content flex-grow-1">
+        <div class="page-header text-white">
+          <h1 class="display-4 fw-bold mb-2">
+            <i class="bi bi-person"></i> Profil Pengguna
+          </h1>
+          <p class="lead">Informasi akun dan riwayat peminjaman</p>
+        </div>
+
+        <div
+          id="alertMessage"
+          class="alert alert-dismissible fade"
+          role="alert"
+          style="display: none"
+        >
+          <span id="alertText"></span>
+          <button
+            type="button"
+            class="btn-close"
+            onclick="hideAlert()"
+          ></button>
+        </div>
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-md-4">
+            <div class="card text-center h-100">
+              <div class="card-body d-flex flex-column justify-content-between">
+                <div>
+                  <img
+                    id="profileAvatar"
+                    src="public/kii.jpeg"
+                    alt="Avatar"
+                    class="profile-avatar mx-auto d-block mb-3"
+                  />
+                  <h4 id="profileName" class="mb-2">Loading...</h4>
+                  <span
+                    class="badge text-white mb-3 d-inline-block"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--primary-color) 0%,
+                        var(--secondary-color) 100%
+                      );
+                    "
+                  >
+                    Member Premium <i class="bi bi-crown"></i>
+                  </span>
+                </div>
+                <button
+                  class="btn btn-primary mt-3 w-100"
+                  data-bs-toggle="modal"
+                  data-bs-target="#editProfileModal"
+                  style="font-size: 16px; padding: 12px 20px"
+                >
+                  <i class="bi bi-pencil"></i> Edit Profil
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-12 col-md-8">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="card-title text-primary mb-0">Informasi Pribadi</h5>
+              </div>
+              <div class="card-body">
+                <div class="row g-3" id="profileInfoContainer"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-sm-6 col-md-4">
+            <div
+              class="card stat-card h-100"
+              data-bs-toggle="modal"
+              data-bs-target="#totalBorrowModal"
+            >
+              <div class="card-body text-center">
+                <i
+                  class="bi bi-book fs-1 mb-3"
+                  style="color: var(--primary-color)"
+                ></i>
+                <div class="stat-value" id="totalBorrowCount">0</div>
+                <div class="text-muted">Total Peminjaman</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div
+              class="card stat-card h-100"
+              data-bs-toggle="modal"
+              data-bs-target="#currentBorrowModal"
+            >
+              <div class="card-body text-center">
+                <i class="bi bi-bookmark fs-1 text-warning mb-3"></i>
+                <div class="stat-value" id="currentBorrowCount">0</div>
+                <div class="text-muted">Sedang Dipinjam</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-sm-6 col-md-4">
+            <div
+              class="card stat-card h-100"
+              data-bs-toggle="modal"
+              data-bs-target="#memberPointsModal"
+            >
+              <div class="card-body text-center">
+                <i class="bi bi-trophy fs-1 text-success mb-3"></i>
+                <div class="stat-value" id="memberPoints">850</div>
+                <div class="text-muted">Poin Member</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header">
+            <h5 class="card-title text-primary mb-0">
+              <i class="bi bi-clock-history"></i> Riwayat Peminjaman
+            </h5>
+          </div>
+          <div class="card-body">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Judul Buku</th>
+                    <th>Tanggal Pinjam</th>
+                    <th>Tanggal Kembali</th>
+                    <th>Status</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody id="borrowHistoryTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-primary">
+              <i class="bi bi-pencil"></i> Edit Profil
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <form id="editProfileForm">
+            <div class="modal-body">
+              <div class="mb-3 text-center">
+                <img
+                  id="avatarPreview"
+                  src="public/kii.jpeg"
+                  alt="Preview"
+                  class="avatar-preview"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Foto Profil</label>
+                <div class="file-upload-wrapper">
+                  <input type="file" id="editAvatarFile" accept="image/*" />
+                  <label for="editAvatarFile" class="file-upload-label">
+                    <i class="bi bi-cloud-upload"></i>
+                    <span>Pilih foto dari penyimpanan</span>
+                  </label>
+                </div>
+                <div class="form-text">Klik untuk memilih foto</div>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Nama Lengkap</label>
+                <input
+                  type="text"
+                  id="editName"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Telepon</label>
+                <input
+                  type="text"
+                  id="editPhone"
+                  class="form-control"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Alamat</label>
+                <textarea
+                  id="editAddress"
+                  class="form-control"
+                  rows="3"
+                  required
+                ></textarea>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal"
+              >
+                Batal
+              </button>
+              <button type="submit" class="btn btn-primary">
+                Simpan Perubahan
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="totalBorrowModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-primary">
+              <i class="bi bi-book"></i> Total Peminjaman
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="totalBorrowModalBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="currentBorrowModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-primary">
+              <i class="bi bi-bookmark"></i> Sedang Dipinjam
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="currentBorrowModalBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade" id="memberPointsModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-primary">
+              <i class="bi bi-trophy"></i> Poin Member
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body" id="memberPointsModalBody"></div>
+        </div>
+      </div>
+    </div>
+
+    <div id="dynamicBorrowModals"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        checkAuth();
+        loadProfile();
+      });
+    </script>
+  </body>
+</html>

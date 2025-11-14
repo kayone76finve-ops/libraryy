@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Detail Buku - Kiano Library</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="public/style.css" />
+    <link rel="icon" href="public/kii.jpeg" type="image/jpg" />
+  </head>
+  <body>
+    <div class="d-flex">
+      <div class="sidebar">
+        <div class="sidebar-header d-flex align-items-center">
+          <img class="profile-avatar" src="public/kii.jpeg" alt="Profile" />
+          <div>
+            <div class="text-white fw-bold fs-4">Kiano</div>
+            <div class="text-white-50 small">Library System</div>
+          </div>
+        </div>
+
+        <div class="p-3">
+          <a href="dashboard.html" class="nav-item">
+            <i class="bi bi-house"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="books.html" class="nav-item active">
+            <i class="bi bi-book"></i>
+            <span>Daftar Buku</span>
+          </a>
+          <a href="profile.html" class="nav-item">
+            <i class="bi bi-person"></i>
+            <span>Profil Saya</span>
+          </a>
+          <a href="index.html" class="nav-item" onclick="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+
+        <div
+          class="position-absolute bottom-0 w-100 p-3 border-top"
+          style="border-color: var(--soft-pink) !important"
+        >
+          <div class="d-flex align-items-center">
+            <img
+              id="sidebarAvatar"
+              src="public/kii.jpeg"
+              alt="Avatar"
+              class="rounded-circle me-3"
+              style="width: 45px; height: 45px; object-fit: cover"
+            />
+            <div>
+              <div id="sidebarName" class="fw-semibold small">Loading...</div>
+              <div id="sidebarEmail" class="text-muted" style="font-size: 12px">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="main-content flex-grow-1">
+        <div class="page-header text-white">
+          <h1 class="display-4 fw-bold mb-2">
+            <i class="bi bi-book"></i> Detail Buku
+          </h1>
+          <p class="lead">Informasi lengkap tentang buku</p>
+        </div>
+
+        <div
+          id="alertMessage"
+          class="alert alert-dismissible fade"
+          role="alert"
+          style="display: none"
+        >
+          <span id="alertText"></span>
+          <button
+            type="button"
+            class="btn-close"
+            onclick="hideAlert()"
+          ></button>
+        </div>
+        <div class="card" id="bookDetailCard"></div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        checkAuth();
+        loadBookDetail();
+      });
+    </script>
+  </body>
+</html>

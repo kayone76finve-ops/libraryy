@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard - Kiano Library</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="public/style.css" />
+    <link rel="icon" href="public/kii.jpeg" type="image/jpg" />
+  </head>
+  <body>
+    <div class="dashboard-sakura">
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+      <div class="sakura-petal">🌸</div>
+    </div>
+
+    <div class="d-flex">
+      <div class="sidebar">
+        <div class="sidebar-header d-flex align-items-center">
+          <img class="profile-avatar" src="public/kii.jpeg" alt="Profile" />
+
+          <div>
+            <div class="text-white fw-bold fs-4">Kiano</div>
+            <div class="text-white-50 small">Library System</div>
+          </div>
+        </div>
+
+        <div class="p-3">
+          <a href="dashboard.html" class="nav-item active">
+            <i class="bi bi-house"></i>
+            <span>Dashboard</span>
+          </a>
+          <a href="books.html" class="nav-item">
+            <i class="bi bi-book"></i>
+            <span>Daftar Buku</span>
+          </a>
+          <a href="profile.html" class="nav-item">
+            <i class="bi bi-person"></i>
+            <span>Profil Saya</span>
+          </a>
+          <a href="index.html" class="nav-item" onclick="logout()">
+            <i class="bi bi-box-arrow-right"></i>
+            <span>Logout</span>
+          </a>
+        </div>
+
+        <div
+          class="position-absolute bottom-0 w-100 p-3 border-top"
+          style="border-color: var(--soft-pink) !important"
+        >
+          <div class="d-flex align-items-center">
+            <img
+              id="sidebarAvatar"
+              src="kii.jpg"
+              alt="Avatar"
+              class="rounded-circle me-3"
+              style="width: 45px; height: 45px; object-fit: cover"
+            />
+            <div>
+              <div id="sidebarName" class="fw-semibold small">Loading...</div>
+              <div id="sidebarEmail" class="text-muted" style="font-size: 12px">
+                Loading...
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content flex-grow-1">
+        <div class="page-header text-white">
+          <h1 class="display-4 fw-bold mb-2">✨ Dashboard Sakura</h1>
+          <p class="lead">Selamat datang di Sistem Perpustakaan Digital 🌸</p>
+        </div>
+        <div class="row g-4 mb-4">
+          <div class="col-md-3">
+            <div
+              class="card stat-card h-100"
+              data-bs-toggle="modal"
+              data-bs-target="#totalBooksModal"
+            >
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <div class="text-muted small fw-semibold">Total Buku</div>
+                  <div
+                    class="rounded p-2"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--light-pink) 0%,
+                        var(--lighter-pink) 100%
+                      );
+                    "
+                  >
+                    <i
+                      class="bi bi-book fs-4"
+                      style="color: var(--primary-color)"
+                    ></i>
+                  </div>
+                </div>
+                <div class="stat-value" id="totalBooksCount">12</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card stat-card h-100">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <div class="text-muted small fw-semibold">Total Anggota</div>
+                  <div
+                    class="rounded p-2"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--light-pink) 0%,
+                        var(--lighter-pink) 100%
+                      );
+                    "
+                  >
+                    <i
+                      class="bi bi-people fs-4"
+                      style="color: var(--primary-color)"
+                    ></i>
+                  </div>
+                </div>
+                <div class="stat-value">567</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card stat-card h-100">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <div class="text-muted small fw-semibold">Buku Dipinjam</div>
+                  <div
+                    class="rounded p-2"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--light-pink) 0%,
+                        var(--lighter-pink) 100%
+                      );
+                    "
+                  >
+                    <i
+                      class="bi bi-bookmark fs-4"
+                      style="color: var(--primary-color)"
+                    ></i>
+                  </div>
+                </div>
+                <div class="stat-value" id="borrowedBooksCount">89</div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card stat-card h-100">
+              <div class="card-body">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
+                  <div class="text-muted small fw-semibold">
+                    Peminjaman Bulan Ini
+                  </div>
+                  <div
+                    class="rounded p-2"
+                    style="
+                      background: linear-gradient(
+                        135deg,
+                        var(--light-pink) 0%,
+                        var(--lighter-pink) 100%
+                      );
+                    "
+                  >
+                    <i
+                      class="bi bi-graph-up fs-4"
+                      style="color: var(--primary-color)"
+                    ></i>
+                  </div>
+                </div>
+                <div class="stat-value" id="monthlyBorrowCount">234</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="card-title text-primary mb-0">
+                  <i class="bi bi-star"></i> Buku Terpopuler
+                </h5>
+              </div>
+              <div class="card-body" id="popularBooksContainer"></div>
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="card h-100">
+              <div class="card-header">
+                <h5 class="card-title text-primary mb-0">
+                  <i class="bi bi-lightning"></i> Aktivitas Terbaru
+                </h5>
+              </div>
+              <div class="card-body" id="recentActivitiesContainer"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal fade" id="totalBooksModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-primary">
+              <i class="bi bi-book"></i> Total Buku
+            </h5>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <p>
+              Perpustakaan kami memiliki
+              <strong id="modalTotalBooks">12 buku</strong> dari berbagai
+              kategori:
+            </p>
+            <ul id="bookCategoriesStats"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="dynamicModals"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="public/main.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        checkAuth();
+        loadDashboard();
+      });
+    </script>
+  </body>
+</html>
